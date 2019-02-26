@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/textConclusion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end|center_vertical"
+        android:text="0"
+        android:layout_weight="1"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/textCurrentOperation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current operation: Plus"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnNumber1"
+                    style="@style/Widget.AppCompat.Button.MyStyle"
+                    android:text="1" />
+
+                <Button
+                    android:id="@+id/btnNumber2"
+                    style="@style/Widget.AppCompat.Button.MyStyle"
+                    android:text="2" />
+
+                <Button
+                    android:id="@+id/btnNumber3"
+                    style="@style/Widget.AppCompat.Button.MyStyle"
+                    android:text="3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnNumber4"
+                    style="@style/Widget.AppCompat.Button.MyStyle"
+                    android:text="4" />
+
+                <Button
+                    android:id="@+id/btnNumber5"
+                    style="@style/Widget.AppCompat.Button.MyStyle"
+                    android:text="5" />
+
+                <Button
+                    android:id="@+id/btnNumber6"
+                    style="@style/Widget.AppCompat.Button.MyStyle"
+                    android:text="6" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnNumber7"
+                    style="@style/Widget.AppCompat.Button.MyStyle"
+                    android:text="7" />
+
+                <Button
+                    android:id="@+id/btnNumber8"
+                    style="@style/Widget.AppCompat.Button.MyStyle"
+                    android:text="8" />
+
+                <Button
+                    android:id="@+id/btnNumber9"
+                    style="@style/Widget.AppCompat.Button.MyStyle"
+                    android:text="9" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnNumber0"
+                    style="@style/Widget.AppCompat.Button.MyStyle"
+                    android:text="0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnDot"
+                    style="@style/Widget.AppCompat.Button.MyStyle"
+                    android:text="." />
+
+                <Button
+                    android:id="@+id/btnEqually"
+                    style="@style/Widget.AppCompat.Button.MyStyle"
+                    android:text="=" />
+
+                <Button
+                    android:id="@+id/btnRemain"
+                    style="@style/Widget.AppCompat.Button.MyStyle"
+                    android:text="%" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnClear"
+                style="@style/Widget.AppCompat.Button.MyStyle"
+                android:text="С" />
+
+            <Button
+                android:id="@+id/btnPlus"
+                style="@style/Widget.AppCompat.Button.MyStyle"
+                android:text="+" />
+
+            <Button
+                android:id="@+id/btnMinus"
+                style="@style/Widget.AppCompat.Button.MyStyle"
+                android:text="-" />
+
+            <Button
+                android:id="@+id/btnMultiply"
+                style="@style/Widget.AppCompat.Button.MyStyle"
+                android:text="*" />
+
+            <Button
+                android:id="@+id/btnDivide"
+                style="@style/Widget.AppCompat.Button.MyStyle"
+                android:text="/" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
