@@ -1,7 +1,10 @@
 package com.example.simplecalc;
 
+import android.util.SparseArray;
+import android.util.SparseIntArray;
 import android.view.View;
 import android.widget.Toast;
+
 
 class MyCalc {
 
@@ -10,61 +13,57 @@ class MyCalc {
     private Operation currentOp = Operation.PLUS;
     private boolean dotAlreadyExists = false, equally = false;
 
-    private int[] btnNums = {R.id.btnNumber1, R.id.btnNumber2, R.id.btnNumber3,
+    private int[] numButtons = {R.id.btnNumber0,
+            R.id.btnNumber1, R.id.btnNumber2, R.id.btnNumber3,
             R.id.btnNumber4, R.id.btnNumber5, R.id.btnNumber6,
-            R.id.btnNumber7, R.id.btnNumber8, R.id.btnNumber9, R.id.btnNumber0};
-    private int[] btnOps = {R.id.btnRemain, R.id.btnPlus, R.id.btnMinus, R.id.btnMultiply, R.id.btnDivide};
+            R.id.btnNumber7, R.id.btnNumber8, R.id.btnNumber9};
+
+    private int[] operationButtons = {R.id.btnRemain, R.id.btnPlus, R.id.btnMinus, R.id.btnMultiply, R.id.btnDivide};
+
+    private SparseIntArray btnNumMap = new SparseIntArray(numButtons.length);
+    private SparseArray<Operation> btnOpMap = new SparseArray<>(operationButtons.length);
 
     private MainActivity activity;
 
     MyCalc(MainActivity activity) {
         this.activity = activity;
+
+        for (int i = 0; i < numButtons.length; i++) btnNumMap.put(numButtons[i], i);
+
+        Operation[] operations = {Operation.REMAIN, Operation.PLUS, Operation.MINUS,
+                Operation.MULTIPLY, Operation.DIVIDE};
+        for (int i = 0; i < operationButtons.length; i++) btnOpMap.put(operationButtons[i], operations[i]);
     }
 
-    View.OnClickListener listener = btn -> {
-        for (int id: btnNums) {
-            if (id == btn.getId()) {
+    View.OnClickListener numListener = numBtn -> {
+        for (int id: numButtons)
+            if (id == numBtn.getId()) {
                 if (equally) {
                     currentNum = "0";
                     equally = false;
                 }
-                switch (id) {
-                    case R.id.btnNumber1:
-                        currentNum += "1";
-                        break;
-                    case R.id.btnNumber2:
-                        currentNum += "2";
-                        break;
-                    case R.id.btnNumber3:
-                        currentNum += "3";
-                        break;
-                    case R.id.btnNumber4:
-                        currentNum += "4";
-                        break;
-                    case R.id.btnNumber5:
-                        currentNum += "5";
-                        break;
-                    case R.id.btnNumber6:
-                        currentNum += "6";
-                        break;
-                    case R.id.btnNumber7:
-                        currentNum += "7";
-                        break;
-                    case R.id.btnNumber8:
-                        currentNum += "8";
-                        break;
-                    case R.id.btnNumber9:
-                        currentNum += "9";
-                        break;
-                    case R.id.btnNumber0:
-                        currentNum += "0";
-                        break;
-                }
+                currentNum += btnNumMap.get(id);
                 delNulls();
                 activity.textConclusion.setText(currentNum);
                 return;
             }
-        }
+    };
+
+    View.OnClickListener opListener = opBtn -> {
+        for (int id: operationButtons)
+            if (id == opBtn.getId()) {
+                if (currentNum.isEmpty() || !hasNumber(currentNum)) bufferNum = 0;
+                else bufferNum = getResult(bufferNum, Double.parseDouble(currentNum), currentOp);
+                currentNum = "0";
+                activity.textConclusion.setText("0");
+
+                currentOp = btnOpMap.get(id);
+                setCurrentOp(currentOp);
+                dotAlreadyExists = false;
+            }
+    };
+
+    View.OnClickListener otherListener = btn -> {
 
         if (btn.getId() == R.id.btnDot) {
             if (!dotAlreadyExists) {
@@ -76,37 +75,9 @@ class MyCalc {
             return;
         }
 
-        for (int id: btnOps) {
-            if (id == btn.getId()) {
-                switch (btn.getId()) {
-                    case R.id.btnRemain:
-                        switchNum();
-                        currentOp = Operation.REMAIN;
-                        break;
-                    case R.id.btnPlus:
-                        switchNum();
-                        currentOp = Operation.PLUS;
-                        break;
-                    case R.id.btnMinus:
-                        switchNum();
-                        currentOp = Operation.MINUS;
-                        break;
-                    case R.id.btnMultiply:
-                        switchNum();
-                        currentOp = Operation.MULTIPLY;
-                        break;
-                    case R.id.btnDivide:
-                        switchNum();
-                        currentOp = Operation.DIVIDE;
-                        break;
-                }
-                setCurrentOp(currentOp);
-                dotAlreadyExists = false;
-                return;
-            }
-        }
 
         if (btn.getId() == R.id.btnClear) {
+            if (currentNum.isEmpty()) return;
             if (currentNum.substring(currentNum.length()).equals(".")) dotAlreadyExists = false;
             currentNum = currentNum.substring(0, currentNum.length()-1);
             activity.textConclusion.setText(currentNum);
@@ -139,26 +110,21 @@ class MyCalc {
         return true;
     };
 
-    private void switchNum() {
-        bufferNum = getResult(bufferNum, Double.parseDouble(currentNum), currentOp);
-        currentNum = "0";
-        activity.textConclusion.setText("0");
+    private static double getResult(double bufferNum, double currentNum, Operation currentOp) {
+        switch (currentOp) {
+            case PLUS: return bufferNum + currentNum;
+            case MINUS: return bufferNum - currentNum;
+            case MULTIPLY: return bufferNum * currentNum;
+            case DIVIDE: return bufferNum / currentNum;
+            case REMAIN: return bufferNum % currentNum;
+        }
+        throw new RuntimeException("Текущая операция равна null");
     }
 
-    private double getResult(double bufferNum, double currentNum, Operation currentOp) {
-        switch (currentOp) {
-            case PLUS:
-                return bufferNum + currentNum;
-            case MINUS:
-                return bufferNum - currentNum;
-            case MULTIPLY:
-                return bufferNum * currentNum;
-            case DIVIDE:
-                return bufferNum / currentNum;
-            case REMAIN:
-                return bufferNum % currentNum;
-        }
-        return 0;
+    private static boolean hasNumber(String s) {
+        char[] numbers = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
+        for (char c: numbers) if (s.contains(String.valueOf(c))) return true;
+        return false;
     }
 
     private void setCurrentOp(Operation currentOp) {

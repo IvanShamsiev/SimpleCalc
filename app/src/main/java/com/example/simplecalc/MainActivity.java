@@ -11,12 +11,12 @@ public class MainActivity extends AppCompatActivity {
 
     TextView textConclusion, textCurrentOperation;
 
-    Button btnNumber1, btnNumber2, btnNumber3,
+    Button btnNumber0,
+            btnNumber1, btnNumber2, btnNumber3,
             btnNumber4, btnNumber5, btnNumber6,
             btnNumber7, btnNumber8, btnNumber9,
-            btnNumber0,
-            btnDot, btnEqually, btnRemain,
-            btnClear, btnPlus, btnMinus, btnMultiply, btnDivide;
+            btnClear, btnPlus, btnMinus, btnMultiply, btnDivide,
+            btnDot, btnEqually, btnRemain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         btnNumber8 = findViewById(R.id.btnNumber8);
         btnNumber9 = findViewById(R.id.btnNumber9);
         btnNumber0 = findViewById(R.id.btnNumber0);
+
         btnDot = findViewById(R.id.btnDot);
         btnEqually = findViewById(R.id.btnEqually);
         btnRemain = findViewById(R.id.btnRemain);
@@ -53,24 +54,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void setButtonsListeners() {
-        btnNumber1.setOnClickListener(myCalc.listener);
-        btnNumber2.setOnClickListener(myCalc.listener);
-        btnNumber3.setOnClickListener(myCalc.listener);
-        btnNumber4.setOnClickListener(myCalc.listener);
-        btnNumber5.setOnClickListener(myCalc.listener);
-        btnNumber6.setOnClickListener(myCalc.listener);
-        btnNumber7.setOnClickListener(myCalc.listener);
-        btnNumber8.setOnClickListener(myCalc.listener);
-        btnNumber9.setOnClickListener(myCalc.listener);
-        btnNumber0.setOnClickListener(myCalc.listener);
-        btnDot.setOnClickListener(myCalc.listener);
-        btnEqually.setOnClickListener(myCalc.listener);
-        btnRemain.setOnClickListener(myCalc.listener);
-        btnClear.setOnClickListener(myCalc.listener);
+        btnNumber1.setOnClickListener(myCalc.numListener);
+        btnNumber2.setOnClickListener(myCalc.numListener);
+        btnNumber3.setOnClickListener(myCalc.numListener);
+        btnNumber4.setOnClickListener(myCalc.numListener);
+        btnNumber5.setOnClickListener(myCalc.numListener);
+        btnNumber6.setOnClickListener(myCalc.numListener);
+        btnNumber7.setOnClickListener(myCalc.numListener);
+        btnNumber8.setOnClickListener(myCalc.numListener);
+        btnNumber9.setOnClickListener(myCalc.numListener);
+        btnNumber0.setOnClickListener(myCalc.numListener);
+
+        btnRemain.setOnClickListener(myCalc.opListener);
+        btnPlus.setOnClickListener(myCalc.opListener);
+        btnMinus.setOnClickListener(myCalc.opListener);
+        btnMultiply.setOnClickListener(myCalc.opListener);
+        btnDivide.setOnClickListener(myCalc.opListener);
+
+        btnDot.setOnClickListener(myCalc.otherListener);
+        btnEqually.setOnClickListener(myCalc.otherListener);
+        btnClear.setOnClickListener(myCalc.otherListener);
+
         btnClear.setOnLongClickListener(myCalc.longListener);
-        btnPlus.setOnClickListener(myCalc.listener);
-        btnMinus.setOnClickListener(myCalc.listener);
-        btnMultiply.setOnClickListener(myCalc.listener);
-        btnDivide.setOnClickListener(myCalc.listener);
     }
 }
