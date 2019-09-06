@@ -13,12 +13,14 @@ class MyCalc {
     private Operation currentOp = Operation.PLUS;
     private boolean dotAlreadyExists = false, equally = false;
 
-    private int[] numButtons = {R.id.btnNumber0,
+    int[] numButtons = {R.id.btnNumber0,
             R.id.btnNumber1, R.id.btnNumber2, R.id.btnNumber3,
             R.id.btnNumber4, R.id.btnNumber5, R.id.btnNumber6,
             R.id.btnNumber7, R.id.btnNumber8, R.id.btnNumber9};
 
-    private int[] operationButtons = {R.id.btnRemain, R.id.btnPlus, R.id.btnMinus, R.id.btnMultiply, R.id.btnDivide};
+    int[] operationButtons = {R.id.btnRemain, R.id.btnPlus, R.id.btnMinus, R.id.btnMultiply, R.id.btnDivide};
+
+    int[] othedButtons = {R.id.btnClear, R.id.btnDot, R.id.btnEqually};
 
     private SparseIntArray btnNumMap = new SparseIntArray(numButtons.length);
     private SparseArray<Operation> btnOpMap = new SparseArray<>(operationButtons.length);
@@ -130,21 +132,11 @@ class MyCalc {
     private void setCurrentOp(Operation currentOp) {
         String operation = "";
         switch (currentOp) {
-            case PLUS:
-                operation = "Plus (+)";
-                break;
-            case MINUS:
-                operation = "Minus (-)";
-                break;
-            case MULTIPLY:
-                operation = "Multiply (*)";
-                break;
-            case DIVIDE:
-                operation = "Divide (/)";
-                break;
-            case REMAIN:
-                operation = "Remain (%)";
-                break;
+            case PLUS: operation = "Plus (+)"; break;
+            case MINUS: operation = "Minus (-)"; break;
+            case MULTIPLY: operation = "Multiply (*)"; break;
+            case DIVIDE: operation = "Divide (/)"; break;
+            case REMAIN: operation = "Remain (%)"; break;
         }
         activity.textCurrentOperation.setText(String.format("Current operation: %s", operation));
     }
